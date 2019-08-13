@@ -29,11 +29,11 @@ public class FbServlet extends HttpServlet {
        
         out.println("<div class=\"row content_row justify-content-center \">");
                     out.println("<div class=\"col-4 align-self-center text-right\">");
-                     out.println(request.getParameter("accessToken")); 
+                     out.println("accessToken: " + request.getParameter("accessToken")); 
                     out.println("</div>"); 
                      out.println("</div>");           
                     
-       FacebookClient fbClient = new DefaultFacebookClient(request.getParameter("accessToken"),Version.VERSION_3_3);
+       /*FacebookClient fbClient = new DefaultFacebookClient(request.getParameter("accessToken"),Version.VERSION_3_3);
        Connection<User> myFriends = fbClient.fetchConnection("me/friends", User.class);
             for (List<User> myFriend : myFriends) {
                 for (User friend : myFriend) {
@@ -48,7 +48,7 @@ public class FbServlet extends HttpServlet {
                     out.println("<div class=\"col-12\"><hr/></div>");
                     out.println("</div>");                      
                 }
-            }
+            }*/
     }
 
    
