@@ -10,7 +10,7 @@
     <name>PhonebookHeroku</name>
 
     <properties>
-        <tomee.version>8.0.0-M2</tomee.version>
+        <tomee.version>8.0.0-M3</tomee.version>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -59,36 +59,12 @@
             <artifactId>kotlogram</artifactId>
             <version>1.0.0-RC3</version>
          </dependency> 
-         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.2.10.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hibernate.javax.persistence</groupId>
-                    <artifactId>hibernate-jpa-2.1-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.spec.javax.transaction</groupId>
-                    <artifactId>jboss-transaction-api_1.2_spec</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.1.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hibernate.javax.persistence</groupId>
-                    <artifactId>hibernate-jpa-2.1-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.spec.javax.transaction</groupId>
-                    <artifactId>jboss-transaction-api_1.2_spec</artifactId>
-                </exclusion>
-            </exclusions>
+           <groupId>org.hibernate</groupId>
+           <artifactId>hibernate-agroal</artifactId>
+           <version>5.4.3.Final</version>
         </dependency> 
+        
         <dependency> 
             <groupId>com.vk.api</groupId> 
             <artifactId>sdk</artifactId> 
@@ -139,7 +115,7 @@
                            </executions>
                            <configuration>
                                <context>ROOT</context>
-                               <tomeeClassifier>microprofile</tomeeClassifier>
+                               <tomeeClassifier>plus</tomeeClassifier>
                                <systemVariables>
                                      <mp.jwt.verify.publickey.location>/publicKey.pem</mp.jwt.verify.publickey.location>
                                </systemVariables>
