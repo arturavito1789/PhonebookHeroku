@@ -100,7 +100,7 @@ $("#a_home").on("click", function (e) {
   let content = "<div class='row content_row justify-content-center'> <div class = 'col-8 new_contact'> <div class='col-12 new_contact_title'> \
   <div class='col-12 new_contact_title_body'> New Contact </div> </div> <div class='col-12 new_contact_body'> \
   <div class='promt_div hidden_element'  id='promt_div'> A user already exists with such data in the database </div> \
-  <img src='https://tard2.herokuapp.com/img/new foto.png' class='img-fluid new_contact_body_img' id = 'choiceFile'>  <input type='file' id='inputFile' style='display: none;'/>\
+  <img src='https://tard2.herokuapp.com/img/newfoto.png' class='img-fluid new_contact_body_img' id = 'choiceFile'>  <input type='file' id='inputFile' style='display: none;'/>\
   <div class='content_div'> <div class='input-group mr-2'> \
   <button class='btn btn-success btn-cursor' type='button'> <i class='fa fa-user'></i> </button> \
   <input class='form-control py-2' type='search' placeholder='FIO' id='new-fio'> </div> <div class='input-group mr-2 div_margin_top' > \
