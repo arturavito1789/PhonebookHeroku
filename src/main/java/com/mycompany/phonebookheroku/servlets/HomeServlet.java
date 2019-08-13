@@ -12,6 +12,17 @@ import com.mycompany.phonebookheroku.dao.DaoEjb;
 import com.mycompany.phonebookheroku.entitys.Users;
 import com.mycompany.phonebookheroku.service.BinTelegram;
 import com.mycompany.phonebookheroku.service.StartTelegram;
+import com.vk.api.sdk.client.TransportClient;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.client.actors.UserActor;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.vk.api.sdk.objects.UserAuthResponse;
+import com.vk.api.sdk.objects.friends.responses.GetResponse;
+import com.vk.api.sdk.objects.status.Status;
+import com.vk.api.sdk.objects.users.UserXtrCounters;
+import com.vk.api.sdk.queries.users.UserField;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
@@ -108,7 +119,7 @@ public class HomeServlet extends HttpServlet {
                List<Users> users = daoEjb.getAllUsers();
                displayDataPgSql(out, users,true); 
             }else{
-               //displayDataVk(out, codevk); 
+               displayDataVk(out, codevk); 
             }
         }
         
@@ -142,6 +153,36 @@ public class HomeServlet extends HttpServlet {
         }           
     }
 
+    
+     public void displayDataVk(PrintWriter out, String code){
+        TransportClient transportClient = HttpTransportClient.getInstance(); 
+        VkApiClient vk = new VkApiClient(transportClient); 
+        try { 
+            UserAuthResponse authResponse = vk.oauth().userAuthorizationCodeFlow(7095028, "tlaM3uxsytj2RBGYelSw", "https://tard2.herokuapp.com/index.html", code).execute();
+            UserActor actor = new UserActor(authResponse.getUserId(), authResponse.getAccessToken()); 
+            GetResponse friends = vk.friends().get(actor).execute();
+            for (Integer fr : friends.getItems()){
+                 List<UserXtrCounters> res = vk.users().get(actor).userIds(fr.toString()).fields(UserField.PHOTO_100).execute();
+                 Status status = vk.status().get(actor).userId(fr).execute();
+                 UserXtrCounters userFild = res.get(0);
+                 out.println("<div class=\"row content_row justify-content-center \">");
+                 out.println("<div class=\"col-4 align-self-center text-right\">");
+                 out.println(" <img src=\"" + userFild.getPhoto100()  + "\" class=\"img-fluid img-circle\">"); 
+                 out.println("</div>"); 
+                 out.println("<div class=\"col-8 width-height-img align-self-center text-left text-white font-italic\"> " + userFild.getFirstName() + " " + userFild.getLastName() + " статус " + status.getText() + "</div>");
+                 out.println("</div>"); 
+                 out.println("<div class=\"row separator_row\">");
+                 out.println("<div class=\"col-12\"><hr/></div>");
+                 out.println("</div>");  
+            
+            }
+        } catch (ApiException ex) {
+           displayError(out, ex.getMessage());
+        } catch (ClientException ex) {
+           displayError(out, ex.getMessage());
+        }
+    }
+     
     public void displayDataTelegram(PrintWriter out) {
           
           StartTelegram cdiTelegram =  BinTelegram.getBeanInstance(beanManager, StartTelegram.class);

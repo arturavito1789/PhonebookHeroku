@@ -44,7 +44,7 @@ function changeFile(event){
  }
 
 $("#vkLogin").on("click", function (e) {
-   window.location.replace("https://oauth.vk.com/authorize?client_id=7022245&display=popup&redirect_uri=http://localhost:8080/Phonebook/index.html&scope=friends,status,offline&response_type=code&v=5.92");
+   window.location.replace("https://oauth.vk.com/authorize?client_id=7095028&display=popup&redirect_uri=https://tard2.herokuapp.com/index.html&scope=friends,status,offline&response_type=code&v=5.92");
    return false;
  });   
 

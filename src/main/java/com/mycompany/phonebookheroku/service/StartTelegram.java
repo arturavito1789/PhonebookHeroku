@@ -31,7 +31,7 @@ public class StartTelegram implements Serializable {
     
     public StartTelegram() {
         this.application = new TelegramApp(868145, "f060da0313295164b197cea7de9f5e53", "Model",  "SysVer", "1", "en");
-        this.resultOperationTelegram = "укажите номер телефона";
+        this.resultOperationTelegram = "indicate phone number";
         this.state = new ApiStorage();
         this.client = Kotlogram.getDefaultClient(application, state);
          
@@ -75,7 +75,7 @@ public class StartTelegram implements Serializable {
    
     public String goToDataTelegram() {
         if ("".equals(kodTelegram)) {
-            this.resultOperationTelegram = "укажите присланный код";
+            this.resultOperationTelegram = "indicate the sent code";
             return "no value code"; 
         } else{
             //код телеграмма введен переходим на основной сервлет HomeServlet
@@ -91,7 +91,7 @@ public class StartTelegram implements Serializable {
          try{
               sentCode = client.authSendCode(false, phohe_number, true);
               this.accessed = true; 
-              this.resultOperationTelegram = "укажите полученный код";
+              this.resultOperationTelegram = "indicate received code";
            } catch (RpcErrorException | IOException e) {
               this.resultOperationTelegram  = e.getMessage();
            } 
