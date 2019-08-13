@@ -43,15 +43,15 @@
                                      <i class="fa fa-user"></i>
                                </button>
                         </span>
-                        <input class="form-control py-2" type="search" placeholder="ФИО" name="search_fio" id="search-fio"> </input>
+                        <input class="form-control py-2" type="search" placeholder="FIO" name="search_fio" id="search-fio"> </input>
                    </div>
                    <div class="input-group mr-2">
                         <button class="btn btn-success btn-cursor" type="button">
                              <i class="fa fa-phone"></i>
                         </button>
-                       <input class="form-control py-2" type="search" placeholder="Телефон" name="search_phone" id="search-phone"> </input>
+                       <input class="form-control py-2" type="search" placeholder="Phone" name="search_phone" id="search-phone"> </input>
                    </div>
-                   <button class="btn btn-success request_DB" type="submit" id="btn_search">Поиск</button>
+                   <button class="btn btn-success request_DB" type="submit" id="btn_search">Search</button>
             </form>
             
          </div>	
@@ -70,18 +70,18 @@
             <div class="col-5 align-self-center">
             <div class="input-group mb-3 text-left">
                 <div class="input-group-prepend text-left">
-                      <h:outputLabel for="phohe_number">Номер телефона:</h:outputLabel>
+                      <h:outputLabel for="phohe_number">Phone number:</h:outputLabel>
                       <h:inputText id="phohe_number" value="#{startTelegram.phohe_number}"/>
-                      <h:commandLink class="btn btn-success" value="Получить код"  action="#{startTelegram.connectTelegram}"/>
+                      <h:commandLink class="btn btn-success" value="Get code"  action="#{startTelegram.connectTelegram}"/>
                 </div>    
             </div>
             </div>
             <div class="col-5 align-self-center">
             <div class="input-group mb-3 text-right">
                 <div class="input-group-prepend text-right">
-                       <h:outputLabel for="kodTelegram">Укажите полученный код:</h:outputLabel>
+                       <h:outputLabel for="kodTelegram">Specify the received code:</h:outputLabel>
                        <h:inputText id="kodTelegram" value="#{startTelegram.kodTelegram}" valueChangeListener="#{startTelegram.changedkodTelegram}"/>
-                       <h:commandLink class="btn btn-success" value="Контакты"  action="#{startTelegram.goToDataTelegram}"/>
+                       <h:commandLink class="btn btn-success" value="Contacts"  action="#{startTelegram.goToDataTelegram}"/>
                 </div>    
             </div>
             </div>

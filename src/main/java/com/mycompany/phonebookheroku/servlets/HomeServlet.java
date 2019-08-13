@@ -1,10 +1,20 @@
 
 package com.mycompany.phonebookheroku.servlets;
 
+import com.github.badoualy.telegram.api.TelegramClient;
+import com.github.badoualy.telegram.tl.api.TLAbsUser;
+import com.github.badoualy.telegram.tl.api.TLUser;
+import com.github.badoualy.telegram.tl.api.auth.TLAuthorization;
+import com.github.badoualy.telegram.tl.api.auth.TLSentCode;
+import com.github.badoualy.telegram.tl.api.contacts.TLContacts;
+import com.github.badoualy.telegram.tl.api.upload.TLFile;
 import com.mycompany.phonebookheroku.dao.DaoEjb;
 import com.mycompany.phonebookheroku.entitys.Users;
+import com.mycompany.phonebookheroku.service.BinTelegram;
+import com.mycompany.phonebookheroku.service.StartTelegram;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -92,7 +102,7 @@ public class HomeServlet extends HttpServlet {
         String codevk = request.getParameter("code");
         String telegram =  request.getParameter("telegram");
         if (telegram != null){
-           //displayDataTelegram(out);  
+           displayDataTelegram(out);  
         } else{
             if(codevk == null){
                List<Users> users = daoEjb.getAllUsers();
@@ -132,6 +142,42 @@ public class HomeServlet extends HttpServlet {
         }           
     }
 
+    public void displayDataTelegram(PrintWriter out) {
+          
+          StartTelegram cdiTelegram =  BinTelegram.getBeanInstance(beanManager, StartTelegram.class);
+          String kodTelegram = cdiTelegram.getKodTelegram();
+          String phohe_number = cdiTelegram.getPhohe_number();
+          TLSentCode sentCode = cdiTelegram.getSentCode();
+          TelegramClient client = cdiTelegram.getClient();
+          try{
+              TLAuthorization authorization = client.authSignIn(phohe_number, sentCode.getPhoneCodeHash(), kodTelegram.trim());
+              TLUser self = authorization.getUser().getAsUser();
+              TLContacts tContacts = (TLContacts) client.contactsGetContacts("");
+              Iterator<TLAbsUser> vIt = tContacts.getUsers().iterator();
+              while (vIt.hasNext()){
+                  out.println("<div class=\"row content_row justify-content-center \">");
+                  out.println("<div class=\"col-4 align-self-center text-right\">");
+                  TLAbsUser item = vIt.next();
+                  TLUser itemU = item.getAsUser();
+                  TLFile Photo = client.getUserPhoto(item, true);
+                  byte[] b = Photo.getBytes().getData();
+                  byte[] encodedBytes = Base64.encodeBase64(b);
+                  String src = "data:image/jpeg;base64," + new String(encodedBytes);
+                  out.println(" <img src=" +src + " class=\"img-fluid img-circle\">");
+                  out.println("</div>");                   
+                  out.println("<div class=\"col-8 width-height-img align-self-center text-left text-white font-italic\"> " + itemU.getFirstName() + " " + itemU.getLastName() + " телефон " + itemU.getPhone() + "</div>");
+                  out.println("</div>");             
+                  out.println("<div class=\"row separator_row\">");
+                  out.println("<div class=\"col-12\"><hr/></div>");   
+                  out.println("</div>");  
+               }
+                
+          } catch (Exception e){
+                displayError(out, e.getMessage()); 
+          }
+          
+          
+     }
     
     public void displayDataPgSql(PrintWriter out, List<Users> users, boolean home){
         

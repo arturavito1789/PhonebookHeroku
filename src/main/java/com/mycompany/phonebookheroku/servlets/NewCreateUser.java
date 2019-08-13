@@ -39,7 +39,7 @@ public class NewCreateUser extends HttpServlet {
         List<Users> users = daoEjb.findUsers(fioParam, phoneParam);
         if (users.size() > 0){
             try (PrintWriter out = response.getWriter()) {
-                 out.println("Уже существует пользователь с такими данными в базе");
+                 out.println("A user already exists with such data in the database");
             }
             return;
         }
@@ -49,7 +49,7 @@ public class NewCreateUser extends HttpServlet {
                  boolean res = daoEjb.saveUser(fioParam, phoneParam, part.getInputStream());
                  if (res  == false){
                     try (PrintWriter out = response.getWriter()) {
-                         out.println("Ошибка при операции добавления в базу данных");
+                         out.println("An error occurred while adding to the database");
                     }
                     return;
                  }
@@ -57,7 +57,7 @@ public class NewCreateUser extends HttpServlet {
         }
         
         try (PrintWriter out = response.getWriter()) {
-             out.println("операция прошла успешно");
+             out.println("the operation was successful");
         }
     }
 
