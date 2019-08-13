@@ -95,8 +95,8 @@ public class HomeServlet extends HttpServlet {
            //displayDataTelegram(out);  
         } else{
             if(codevk == null){
-              // List<Users> users = daoEjb.getAllUsers();
-              // displayDataPgSql(out, users,true); 
+               List<Users> users = daoEjb.getAllUsers();
+               displayDataPgSql(out, users,true); 
             }else{
                //displayDataVk(out, codevk); 
             }
