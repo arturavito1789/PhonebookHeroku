@@ -195,17 +195,19 @@ public class HomeServlet extends HttpServlet {
               TLUser self = authorization.getUser().getAsUser();
               TLContacts tContacts = (TLContacts) client.contactsGetContacts("");
               Iterator<TLAbsUser> vIt = tContacts.getUsers().iterator();
+              out.println("<div> normal");             
+              out.println("</div>");             
               while (vIt.hasNext()){
                   out.println("<div class=\"row content_row justify-content-center \">");
-                  out.println("<div class=\"col-4 align-self-center text-right\">");
+                  //out.println("<div class=\"col-4 align-self-center text-right\">");
                   TLAbsUser item = vIt.next();
                   TLUser itemU = item.getAsUser();
-                  TLFile Photo = client.getUserPhoto(item, true);
-                  byte[] b = Photo.getBytes().getData();
-                  byte[] encodedBytes = Base64.encodeBase64(b);
-                  String src = "data:image/jpeg;base64," + new String(encodedBytes);
-                  out.println(" <img src=" +src + " class=\"img-fluid img-circle\">");
-                  out.println("</div>");                   
+                  //TLFile Photo = client.getUserPhoto(item, true);
+                 // byte[] b = Photo.getBytes().getData();
+                 // byte[] encodedBytes = Base64.encodeBase64(b);
+                 // String src = "data:image/jpeg;base64," + new String(encodedBytes);
+                 // out.println(" <img src=" +src + " class=\"img-fluid img-circle\">");
+                  //out.println("</div>");                   
                   out.println("<div class=\"col-8 width-height-img align-self-center text-left text-white font-italic\"> " + itemU.getFirstName() + " " + itemU.getLastName() + " телефон " + itemU.getPhone() + "</div>");
                   out.println("</div>");             
                   out.println("<div class=\"row separator_row\">");
