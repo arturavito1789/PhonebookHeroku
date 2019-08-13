@@ -95,8 +95,8 @@ public class HomeServlet extends HttpServlet {
            //displayDataTelegram(out);  
         } else{
             if(codevk == null){
-               List<Users> users = daoEjb.getAllUsers();
-               displayDataPgSql(out, users,true); 
+               //List<Users> users = daoEjb.getAllUsers();
+              // displayDataPgSql(out, users,true); 
             }else{
                //displayDataVk(out, codevk); 
             }
@@ -116,6 +116,20 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //метод срабатывает только если в форме заполненно хотя бы одно поле поиска
+        response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");//если передаются русские символы
+        PrintWriter out = response.getWriter();
+        String home = request.getParameter("home");
+        List<Users> users = null;
+        if (home.equals("false")){
+           users = daoEjb.findUsers(request.getParameter("search_fio"), request.getParameter("search_phone")); 
+           displayDataPgSql(out, users, false); 
+        }else{
+           users = daoEjb.getAllUsers();
+           displayDataPgSql(out, users, false); 
+        }           
     }
 
     
