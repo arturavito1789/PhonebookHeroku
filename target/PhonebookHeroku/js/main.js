@@ -98,16 +98,16 @@ $(".request_DB").on("click", function (e) {
 
 $("#a_home").on("click", function (e) {
   let content = "<div class='row content_row justify-content-center'> <div class = 'col-8 new_contact'> <div class='col-12 new_contact_title'> \
-  <div class='col-12 new_contact_title_body'> Новый контакт </div> </div> <div class='col-12 new_contact_body'> \
-  <div class='promt_div hidden_element'  id='promt_div'> Уже существует пользователь с такими данными в базе </div> \
+  <div class='col-12 new_contact_title_body'> New Contact </div> </div> <div class='col-12 new_contact_body'> \
+  <div class='promt_div hidden_element'  id='promt_div'> A user already exists with such data in the database </div> \
   <img src='img/new foto.png' class='img-fluid new_contact_body_img' id = 'choiceFile'>  <input type='file' id='inputFile' style='display: none;'/>\
   <div class='content_div'> <div class='input-group mr-2'> \
   <button class='btn btn-success btn-cursor' type='button'> <i class='fa fa-user'></i> </button> \
-  <input class='form-control py-2' type='search' placeholder='ФИО' id='new-fio'> </div> <div class='input-group mr-2 div_margin_top' > \
+  <input class='form-control py-2' type='search' placeholder='FIO' id='new-fio'> </div> <div class='input-group mr-2 div_margin_top' > \
   <button class='btn btn-success btn-cursor' type='button'> <i class='fa fa-phone'></i> </button> \
-  <input class='form-control py-2' type='search' placeholder='Телефон' id='new-phone'> </div> </div> </div> \
+  <input class='form-control py-2' type='search' placeholder='Phone' id='new-phone'> </div> </div> </div> \
   <div class='col-12 new_contact_footer'> <button class='new_contact_footer_btn btn_new'> <i class='fa fa-play-circle new_contact_footer_btn_play'> \
-  </i> Создать </button> </div> </div> </div>";
+  </i> Create </button> </div> </div> </div>";
   $("#container_data").html(content);
   $("#new-phone").mask("8(999) 999-99-99");
   $('.btn_new').prop('disabled', true);
