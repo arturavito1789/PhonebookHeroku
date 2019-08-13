@@ -59,7 +59,7 @@ $("#fbLogin").on("click", function (e) {
    FB.login(function(response) {
        if (response.status === 'connected') {
           var xhr = new XMLHttpRequest();//выполняет запрос на сервер синхронный или асинхронный
-          xhr.open('POST', 'http://localhost:8080/Phonebook/FbServlet', false);//передаем через post зашишенный ключ
+          xhr.open('POST', 'https://tard2.herokuapp.com/FbServlet', false);//передаем через post зашишенный ключ
           const formData = new FormData();
           formData.append("accessToken", response.authResponse.accessToken);
           xhr.send(formData);
